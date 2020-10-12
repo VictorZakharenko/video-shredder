@@ -20,7 +20,7 @@ migrate = Migrate()
 bootstrap = Bootstrap()
 
 def create_app(config_class=Config):
-    app = Flask(__name__)
+    app = Flask(__name__, static_folder='static')
 
     admin.init_app(app,index_view = MyAdminIndexView())
     db.init_app(app)
@@ -29,6 +29,9 @@ def create_app(config_class=Config):
     bootstrap.init_app(app)
 
     app.config.from_object(config_class)
+    app.config['MAX_CONTENT_LENGTH'] = 2 * 1024 * 1024
+    app.config['UPLOAD_EXTENSIONS'] = ['.mp4', '.mov']
+
 
     app.redis = Redis.from_url(app.config['REDIS_URL'])
     app.task_queue = rq.Queue('max-tasks', connection=app.redis)

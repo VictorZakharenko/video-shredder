@@ -12,3 +12,8 @@ def not_found_error(error):
 def internal_error(error):
     db.session.rollback()
     return render_template('errors/500.html'), 500
+
+
+@bp.errorhandler(413)
+def too_large(e):
+    return "File is too large", 413
