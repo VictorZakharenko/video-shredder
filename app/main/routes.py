@@ -27,7 +27,7 @@ def upload_video():
 
 @bp.route('/uploads/<filename>')
 def uploads(filename):
-    print(split_segment(filename, 2))
+    print(split_segment(os.path.join(current_app.config['UPLOAD_PATH'], filename), 2,'count'))
     return render_template('video.html', filename=filename)
 
 # import imghdr
