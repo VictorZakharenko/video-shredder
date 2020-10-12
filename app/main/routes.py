@@ -6,6 +6,7 @@ from flask import send_from_directory, send_file
 from flask import current_app
 from flask import request, redirect, url_for
 from werkzeug.utils import secure_filename
+from app.main.utils import split_segment
 import os
 
 @bp.route('/')
@@ -26,6 +27,7 @@ def upload_video():
 
 @bp.route('/uploads/<filename>')
 def uploads(filename):
+    print(split_segment(filename, 2))
     return render_template('video.html', filename=filename)
 
 # import imghdr
