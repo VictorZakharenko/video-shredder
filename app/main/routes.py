@@ -6,7 +6,7 @@ from flask import send_from_directory, send_file
 from flask import current_app
 from flask import request, redirect, url_for
 from werkzeug.utils import secure_filename
-from app.main.utils import split_segment
+from app.main.utils import get_metadata
 import os
 
 @bp.route('/')
@@ -27,9 +27,6 @@ def upload_video():
 
 @bp.route('/uploads/<filename>')
 def uploads(filename):
-    print(split_segment(os.path.join(current_app.config['UPLOAD_PATH'], filename), 2,'count'))
-    return render_template('video.html', filename=filename)
-
-# import imghdr
-# import os
-# from flask import Flask, render_template, request, redirect, url_for, abort, \
+    video_length, video_fps = get_metadata(os.path.join(current_app.config['UPLOAD_PATH'], filename))
+    metadata = 'video_length = {}\nvideo_fps = {}'.format(video_length, video_fps)
+    return render_template('video.html', filename=filename, metadata=metadata)
