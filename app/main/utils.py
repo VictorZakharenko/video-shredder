@@ -32,7 +32,6 @@ def split_cut(filename, n, by='size'):
 
     # parse meta data
     video_length, video_fps = get_metadata(filename)
-    print(video_lengt, video_fps)
     # calculate split_count
     if split_size:
         split_count = math.ceil(video_length / split_size)
