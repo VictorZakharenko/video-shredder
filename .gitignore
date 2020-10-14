@@ -3,4 +3,6 @@ __pycache__
 logs
 *.pyc
 app/static/uploads/*
+# exception to the rule
+!app/static/uploads/.gitkeep 
 app.db
