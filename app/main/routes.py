@@ -30,3 +30,10 @@ def uploads(filename):
     video_length, video_fps = get_metadata(os.path.join(current_app.config['UPLOAD_PATH'], filename))
     metadata = 'video_length = {}\nvideo_fps = {}'.format(video_length, video_fps)
     return render_template('video.html', filename=filename, metadata=metadata)
+
+@bp.route('/shredder', methods=['POST'])
+def shredder():
+    uploaded_file = request
+    timestamps = request
+    link_to_zip = {}
+    return link_to_zip
