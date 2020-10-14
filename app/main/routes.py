@@ -33,6 +33,7 @@ def uploads(filename):
 
 @bp.route('/shredder', methods=['POST'])
 def shredder():
+    print(request)
     uploaded_file = request
     timestamps = request
     link_to_zip = {}

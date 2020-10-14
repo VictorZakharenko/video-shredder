@@ -21,7 +21,17 @@ $(document).ready(function() {
         fieldSet.each(function()  {
             timestamps.push($(  this ).val());
         })
-        console.log(timestamps);
+        filepath = $('video source').attr('src')
+        console.log(filepath);
+        $.post('/shredder', {
+                filepath: filepath,
+                timestamps: timestamps
+            }).done(function(response){
+                console.log(response)
+            }).fail(function(err){
+                console.log(err)
+            });
+
     });
 
     $("#add").trigger('click');
