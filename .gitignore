@@ -3,4 +3,3 @@ __pycache__
 logs
 *.pyc
 app/static/uploads/*
-app.db
