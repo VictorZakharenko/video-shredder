@@ -8,9 +8,9 @@ app = create_app()
 @app.cli.command()
 def give_admin_role_to_new_user():
     #create user
-    user = User.query.filter_by(email='cider@sweet.ru').first()
+    user = User.query.filter_by(email='cider1@sweet.ru').first()
     if not user:
-        user = User(email='cider@sweet.ru', active=True)
+        user = User(email='cider1@sweet.ru', active=True)
         user.set_password('91Afr1caShredder1!')
         db.session.add(user)
         db.session.commit() 
