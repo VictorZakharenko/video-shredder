@@ -6,23 +6,29 @@ import rq
 from redis import Redis
 from config import Config
 from flask_admin import Admin
-from app.admin.views import MyAdminIndexView
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_bootstrap import Bootstrap
 
-
-admin=Admin()
 db = SQLAlchemy()
 login = LoginManager()
+login.login_view = 'auth.login'
 migrate = Migrate()
 bootstrap = Bootstrap()
 
 def create_app(config_class=Config):
     app = Flask(__name__, static_folder='static')
 
+    from app.models import User, Role, Task
+    from app.admin.views import MyAdminIndexView, MyModelView
+    from sqlalchemy import inspect
+    admin=Admin()
     admin.init_app(app,index_view = MyAdminIndexView())
+    admin.add_view(MyModelView(User, db.session))
+    admin.add_view(MyModelView(Role, db.session))
+    admin.add_view(MyModelView(Task, db.session))
+
     db.init_app(app)
     migrate.init_app(app,db)
     login.init_app(app)

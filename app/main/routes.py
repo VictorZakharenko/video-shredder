@@ -8,6 +8,7 @@ from flask import request, redirect, url_for
 from werkzeug.utils import secure_filename
 from app.main.utils import get_metadata
 import os
+from flask_login import current_user
 
 @bp.route('/')
 @bp.route('/index')
