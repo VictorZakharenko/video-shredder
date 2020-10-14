@@ -22,15 +22,18 @@ $(document).ready(function() {
             timestamps.push($(  this ).val());
         })
         filepath = $('video source').attr('src')
-        console.log(filepath);
-        $.post('/shredder', {
+        $.ajax({
+          type: "POST",
+          contentType: "application/json; charset=utf-8",
+          url: '/shredder',
+          data: JSON.stringify({                
                 filepath: filepath,
-                timestamps: timestamps
-            }).done(function(response){
-                console.log(response)
-            }).fail(function(err){
-                console.log(err)
-            });
+                timestamp: timestamps}),
+          success: function (data) {
+            console.log(data);
+          },
+          dataType: "json"
+        });
 
     });
 
